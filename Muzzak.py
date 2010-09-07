@@ -3,6 +3,10 @@ import socket,os
 
 def page():
 	c="""
+HTTP/1.1 200 OK
+Content-Type: text/html
+Server: Muzzak.py
+
 <html>
 	<head>
 	<title>Muzzak! 0.1a</title>
@@ -76,7 +80,7 @@ def page():
 			</div>
 			<br/>
 			<div class='details'>
-			%s/%s @ %skbps. This is track %s of %s.
+			%s/%s @ %skbps. This is track %s of %s. %s
 			</div>
 			<br/>
 			<div class='foot round'>
@@ -101,7 +105,10 @@ while 1:
 	try:
 		conn, add = sock.accept()
 		buff = conn.recv(128)
-		get = buff.split()[1]
+		try:
+			get = buff.split()[1]
+		except IndexError:
+			cmd = '_Error'
 		print add[0],"sent",get[1:]
 		cmd=get[1:]
 		if(cmd=='PREV'):
@@ -126,12 +133,10 @@ while 1:
 		p = os.popen("dcop amarok playlist getTotalTrackCount").read()
 		len = os.popen("dcop amarok player totalTime").read()
 		now = os.popen("dcop amarok player currentTime").read()
-		lens = int(os.popen("dcop amarok player trackTotalTime").read())
-		nows = int(os.popen("dcop amarok player trackCurrentTime").read())
-		per = 400*nows/lens
-		print per
+		status = os.popen("dcop amarok player isPlaying").read()
+		status = 'Playing.' if (status[:4]=='true') else 'Paused.'
 		bit = os.popen("dcop amarok player bitrate").read()
-		conn.send(player%(title,album,artist,now,len,bit,pi,p))
+		conn.send(player%(title,album,artist,now,len,bit,pi,p,status))
 		conn.close()
 	except socket.error:
 		pass
