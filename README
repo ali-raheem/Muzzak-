@@ -6,13 +6,13 @@ Which can easily be modified to use DBUS and to support any other media player
 How it works:
 
 It implements a very basic and stripped down HTTP server as an interface. 
-Instructions from this interface are used to contorl amarok via DCOP commands.
+Instructions from this interface are used to control amarok via DCOP commands.
 
 
 Use:
 
-Muzzak! can be used to let others control your music... Or to control yoru 
-music with yoru web enabled device at a party, maybe even to play music to your 
+Muzzak! can be used to let others control your music... Or to control your 
+music with your web enabled device at a party, maybe even to play music to your 
 pets when you're away...
 
 
