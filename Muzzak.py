@@ -72,6 +72,7 @@ def page():
 			<a href='PLAY'>[Play]</a>&nbsp;
 			<a href='PAUSE'>[Pause]</a>&nbsp;
 			<a href='NEXT'>[Next]</a>&nbsp;
+			<a href='/'>[Check]</a>
 			</div>
 			<br/>
 			<div class='details'>
@@ -125,6 +126,10 @@ while 1:
 		p = os.popen("dcop amarok playlist getTotalTrackCount").read()
 		len = os.popen("dcop amarok player totalTime").read()
 		now = os.popen("dcop amarok player currentTime").read()
+		lens = int(os.popen("dcop amarok player trackTotalTime").read())
+		nows = int(os.popen("dcop amarok player trackCurrentTime").read())
+		per = 400*nows/lens
+		print per
 		bit = os.popen("dcop amarok player bitrate").read()
 		conn.send(player%(title,album,artist,now,len,bit,pi,p))
 		conn.close()
