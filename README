@@ -15,6 +15,7 @@ Muzzak! can be used to let others control your music... Or to control your
 music with your web enabled device at a party, maybe even to play music to your 
 pets when you're away...
 
+Currently I'm working on using it to control the music played from a GuruPlug via a bluetooth headset.
 
 Requirements:
 	Amarok
